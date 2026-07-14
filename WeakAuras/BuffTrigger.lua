@@ -897,7 +897,11 @@ local function GroupRosterUpdate(event)
   if (not WeakAuras.myGUID) then
     WeakAuras.myGUID = UnitGUID("player")
   end
-  groupMembers[WeakAuras.myGUID] = WeakAuras.me;
+  if (WeakAuras.myGUID) then
+    groupMembers[WeakAuras.myGUID] = WeakAuras.me;
+  else
+    recheck = true;
+  end
   aura_cache:AssertMemberList(groupMembers);
   if (recheck) then
     timer:ScheduleTimer(GroupRosterUpdate, 0.5);
